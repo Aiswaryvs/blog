@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./style.css"> -->
+    <script src="https://kit.fontawesome.com/23846bd33a.js" crossorigin="anonymous"></script>
+    <!-- CSS only -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- style css -->
+    <style>
+     @import url('https://fonts.googleapis.com/css2?family=Babylonica&family=Boogaloo&family=Caveat&family=Cookie&family=Dancing+Script&family=Ingrid+Darling&family=Lavishly+Yours&family=Lobster+Two&family=Macondo&family=Meie+Script&family=MonteCarlo&family=My+Soul&family=Oleo+Script&family=Pacifico&family=Satisfy&family=Source+Serif+Pro:wght@200&family=Tapestry&family=Ultra&family=Updock&family=Yellowtail&display=swap');
+
+          *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    /* background-image: url(./images/blg.jpg); */
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+}
+.menu-bar{
+    background: rgb(229, 73, 73);
+    text-align: center;
+    height: 85px;
+}
+.menu-bar ul{
+    display:inline-flex;
+    list-style: none;
+    color: white;
+
+}
+.menu-bar ul li{
+    width: 120px;
+    margin: 15px;
+    padding: 15px;
+}
+.menu-bar ul li a{
+    text-decoration: none;
+    color: white;
+     font-family: 'Tapestry', cursive;
+
+}
+.active, .menu-bar ul li:hover
+{
+    /* background:rgb(244, 68, 68);
+    border-radius: 3px; */
+    color:rgb(243, 233, 232)
+}
+.sub-menu{
+    display: none;
+}
+.menu-bar ul li:hover .sub-menu{
+    display: block;
+    position: absolute;
+    background-color: rgb(229, 73, 73);
+    margin-top: 15px;
+    margin-left: -15px;
+}
+.menu-bar ul li:hover .sub-menu ul{
+    display: block;
+    margin: 10px;
+
+}
+.menu-bar ul li:hover .sub-menu ul li{
+    width: 90px;
+    padding: 3px;
+    border-bottom: 1px  double #fff;
+    background: transparent;
+    border-radius: 0;
+    text-align: left;
+
+}
+.menu-bar ul li:hover .sub-menu ul li:last-child{
+    border-bottom: none;
+}
+.menu-bar ul li:hover .sub-menu ul li a:hover{
+    color: #5d0303;
+}
+
+input[type="search"]{
+    border: none;
+    position:absolute;
+    left: 79%;
+    top: 21%;
+    border-radius: 9px;
+    padding: 10px;
+    outline: none;
+}
+#sb{
+    position:absolute;
+    margin-left: 566px;
+    margin-top: 32px;
+    
+}
+.sc1{
+    height: 60px;
+    width: 60px;
+    margin-top: 14px;
+    margin-left: -646px;
+}
+.card{
+    border-radius: 50px;
+    background-color: #FFF;
+    width: 320px;
+}
+.card-image{
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background: rgb(251, 249, 249);
+    padding: 3px;
+}
+.card-image .card-img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid rgb(255, 131, 131);
+}
+.image-content, .card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px;
+
+}
+.image-content{
+    row-gap: 5px;
+    position: relative;
+    
+}
+.name{
+    font-size: 18px;
+    font-weight: 500px;
+    color: #863e0a;
+}
+.description{
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+}
+.button{
+    border: none;
+    font-size: 16px;
+    color: #fff;
+    padding: 8px 16px;
+    background-color: rgb(244, 88, 82);
+    border-radius: 6px;
+    margin: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.button:hover{
+    background: #fff;
+    color: rgb(244, 88, 82);
+
+
+}
+.overlay{
+    position: absolute;
+    left:0;
+    top: 0;
+    height: 57%;
+    width: 100%;
+    background-color: rgb(245, 95, 95);
+    border-radius: -6px 25px 0 25px;
+
+}
+.card-body{
+    text-align: center;
+}
+.mbl{
+    text-align: center;
+    margin-top: 30px;
+    font-family: 'Ultra', serif;
+}
+span{
+  color: #df2b2b;
+}
+
+
+
+    </style>
+
+
+    <!--  -->
+</head>
+
+<body>
+<div class="menu-bar sticky-top">
+    <ul>
+        {%if request.user.users.profile_picture%}
+        <img src="{{request.user.users.profile_picture.url}}" alt="" class="sc1">
+        {%endif%}
+        <li class="active"><a href="#">Home </a></li>
+        <li><a href="#">Link </a></li>
+        <li><a href="#">Profile </a><i class="fa fa-angle-down"></i>
+            <div class="sub-menu">
+                <ul>
+                    {%if request.user.users%}
+                    <li><a href="{%url 'view-profile'%}">View My Profile</a></li>
+                    {%else%}
+                    <li><a href="{%url 'add-profile'%}">Add Profile</a></li>
+                    {%endif%}
+                    <li><a href="#">Change Password</a></li>
+                    <li><a href="#">update</a></li>
+                    <li><a href="#">View</a></li>
+                </ul>
+            </div>
+        </li>
+        <li><a href="#">About Us </a></li>
+        <li><a href="{%url 'signout'%}">Logout</a></li>
+        <form action="" method="get">
+            <input type="search" placeholder="search here" required="required"><i class="fa fa-search" id="sb"></i>
+        </form>
+    </ul>
+
+</div>
+<h1 class="mbl">My<span>Blog</span></h1>
+<div class="container" style="margin-top: 100px; margin-left: 40px;">
+    <div class="row">
+        <div class="col-4">
+            <div class="card">
+                <div class="image-content">
+                    <span class="overlay"></span>
+                    <div class="card-image">
+                        {%if request.user.users.profile_picture%}
+                        <img src="{{request.user.users.profile_picture.url}}" alt="" class="card-img">
+                        {%else%}
+                        <img src="{%static 'images/propic.jpg'%}" alt="" class="card-img">
+                        {%endif%}
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h2 class="name"><i class="fa fa-user" style="color:red"></i>{{request.user}}</h2>
+                    <p class="description"></p>
+
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{request.user.users.bio}}</li>
+                    <li class="list-group-item"><i class="fa fa-phone" style="color:red"></i>{{request.user.users.phone}}</li>
+                    <li class="list-group-item"><i class="fa-solid fa-calendar-days" style="color:red"></i>{{request.user.users.date_of_birth}}</li>
+                </ul>
+                <div class="card-body">
+                    <button class="button">View Profile</button>
+                </div>
+
+            </div>
+            <!-- <h1>hello</h1> -->
+
+        </div>
+
+        <div class="col-4">
+
+            <body>
+            <div class="container">
+                {%if messages%}
+                {%for msg in messages%}
+
+
+                {%if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS%}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>HEY!</strong> {{msg}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!--            <div class="bg-info text-dark">-->
+                <!--                {{msg}}-->
+                <!--            </div>-->
+                {%endif%}
+                {%if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR%}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>HEY!</strong>{{msg}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <!--            <div class="bg-danger text-white">-->
+                <!--                {{msg}}-->
+                <!--            </div>-->
+                {%endif%}
+                {%endfor%}
+                {%endif%}
+            </div>
+            {%block body_block%}
+
+            {%endblock%}
+        </div>
+</body>
+</div>
+
+
+</div>
+</div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/23846bd33a.js" crossorigin="anonymous"></script>
+</html>

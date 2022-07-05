@@ -1,0 +1,84 @@
+.nav-item{
+    margin-left:20px;
+    color:white;
+
+}
+.nav-link{
+    color:white;
+}
+.card{
+    border-radius: 50px;
+    background-color: #FFF;
+    width: 320px;
+}
+.card-image{
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background: rgb(251, 249, 249);
+    padding: 3px;
+}
+.card-image .card-img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid rgb(255, 131, 131);
+}
+.image-content, .card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px;
+
+}
+.image-content{
+    row-gap: 5px;
+    position: relative;
+
+}
+.name{
+    font-size: 18px;
+    font-weight: 500px;
+    color: #863e0a;
+}
+.description{
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+}
+.button{
+    border: none;
+    font-size: 16px;
+    color: #fff;
+    padding: 8px 16px;
+    background-color: rgb(244, 88, 82);
+    border-radius: 6px;
+    margin: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.button:hover{
+    background: #fff;
+    color: rgb(244, 88, 82);
+
+
+}
+.overlay{
+    position: absolute;
+    left:0;
+    top: 0;
+    height: 57%;
+    width: 100%;
+    background-color: rgb(245, 95, 95);
+    border-radius: -6px 25px 0 25px;
+
+}
+.card-body{
+    text-align: center;
+}
+.mbl{
+    text-align: center;
+    margin-top: 30px;
+}
