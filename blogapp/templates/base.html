@@ -107,9 +107,11 @@ input[type="search"]{
     width: 60px;
     margin-top: 14px;
     margin-left: -646px;
+    border-radius:50%;
+    cursor:pointer;
 }
 .card{
-    border-radius: 50px;
+    border-radius: 24px;
     background-color: #FFF;
     width: 320px;
 }
@@ -160,6 +162,7 @@ input[type="search"]{
     margin: 14px;
     cursor: pointer;
     transition: all 0.3s ease;
+    text-decoration:none;
 }
 .button:hover{
     background: #fff;
@@ -188,20 +191,17 @@ input[type="search"]{
 span{
   color: #df2b2b;
 }
-
-
-
-    </style>
+</style>
 
 
     <!--  -->
 </head>
-
 <body>
 <div class="menu-bar sticky-top">
     <ul>
         {%if request.user.users.profile_picture%}
-        <img src="{{request.user.users.profile_picture.url}}" alt="" class="sc1">
+      <a href="{%url 'pic-change' request.user.users.id%}" class="n1">
+            <img src="{{request.user.users.profile_picture.url}}" alt="" class="sc1"></a>
         {%endif%}
         <li class="active"><a href="#">Home </a></li>
         <li><a href="#">Link </a></li>
@@ -209,11 +209,11 @@ span{
             <div class="sub-menu">
                 <ul>
                     {%if request.user.users%}
-                    <li><a href="{%url 'view-profile'%}">View My Profile</a></li>
+<!--                    <li><a href="{%url 'view-profile'%}"></a></li>-->
                     {%else%}
                     <li><a href="{%url 'add-profile'%}">Add Profile</a></li>
                     {%endif%}
-                    <li><a href="#">Change Password</a></li>
+                    <li><a href="{%url 'password-reset'%}">Change Password</a></li>
                     <li><a href="#">update</a></li>
                     <li><a href="#">View</a></li>
                 </ul>
@@ -248,12 +248,14 @@ span{
 
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">{{request.user.users.bio}}</li>
+                    <li class="list-group-item"><i class="fa-solid fa-blog" style="color:red"></i>{{request.user.users.bio}}</li>
                     <li class="list-group-item"><i class="fa fa-phone" style="color:red"></i>{{request.user.users.phone}}</li>
-                    <li class="list-group-item"><i class="fa-solid fa-calendar-days" style="color:red"></i>{{request.user.users.date_of_birth}}</li>
+                    <li class="list-group-item"><i class="fa-solid fa-cake-candles" style="color:red"></i>{{request.user.users.date_of_birth}}</li>
                 </ul>
                 <div class="card-body">
-                    <button class="button">View Profile</button>
+                    <a href="{%url 'profile-update' request.user.users.id%}" class="button">UpdateProfile</a>
+
+<!--                    <button class="button">Update Profile</button>-->
                 </div>
 
             </div>
@@ -261,7 +263,7 @@ span{
 
         </div>
 
-        <div class="col-4">
+        <div class="col-8">
 
             <body>
             <div class="container">
