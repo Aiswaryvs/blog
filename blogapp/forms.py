@@ -53,5 +53,5 @@ class CommentForm(ModelForm):
         model=Comments
         fields=["comment"]
         widgets={
-            "comment":forms.TextInput(attrs={"class":"form-control"})
+            "comment":forms.TextInput(attrs={"class":"form-control","placeholder":"add comment"})
         }

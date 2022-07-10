@@ -153,4 +153,11 @@ def add_comment(request,*args,**kwargs):
         messages.success(request,"Comment has been posted")
         return redirect("home")
 
+def add_like(request,*args,**kwargs):
+    blog_id=kwargs.get("post_id")
+    blog=Blogs.objects.get(id=blog_id)
+    blog.liked_by.add(request.user)
+    blog.save()
+    return redirect("home")
+
 

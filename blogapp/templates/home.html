@@ -16,7 +16,7 @@
     <form action="" method="post" enctype="multipart/form-data">
             {%csrf_token%}
               {{form.as_p}}
-      <input type="submit" value="post">
+      <input type="submit" value="post" class="btn btn-danger" style="margin-left:50%">
     </form>
   </div>
   <div class="col-4"></div>
@@ -30,13 +30,16 @@
       <img src="{{blog.image.url}}" class="img-fluid" alt="...">
     <p>Posted_by :{{blog.author}}</p>
     <p>Created_at :{{blog.posted_date}}</p>
+    <a href="{%url 'add-like' blog.id%}" class="btn btn-danger">Like</a>
+        {{blog.get_like_count}}
+        {{blog.get_liked_users}}
     <form action="{%url 'add-comment' blog.id%}" method="post">
       {%csrf_token%}
       {{comment_form.as_p}}
       {%for comment in blog.comments_set.all%}
       <div>
-        {{comment.comment}}
-        {{comment.user}}
+       <h6> {{comment.comment}}</h6>
+       <h6>Commented by: {{comment.user}}</h6>
       </div>
       {%endfor%}
       <input type="submit" class="btn btn-danger">

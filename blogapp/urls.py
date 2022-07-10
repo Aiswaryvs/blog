@@ -11,6 +11,7 @@ urlpatterns = [
     path("users/password/change",views.PasswordResetView.as_view(),name="password-reset"),
     path("user/profile/change/<int:user_id>",views.ProfileUpdateView.as_view(),name="profile-update"),
     path("user/propic/edit/<int:user_id>",views.ChangeProfilePicView.as_view(),name="pic-change"),
-    path("post/comment/<int:post_id>",views.add_comment,name="add-comment")
+    path("post/comment/<int:post_id>",views.add_comment,name="add-comment"),
+    path("post/like/add/<int:post_id>",views.add_like,name="add-like")
 
 ]

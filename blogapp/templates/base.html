@@ -90,7 +90,7 @@ body{
 input[type="search"]{
     border: none;
     position:absolute;
-    left: 79%;
+    left: 77%;
     top: 21%;
     border-radius: 9px;
     padding: 10px;
@@ -98,7 +98,7 @@ input[type="search"]{
 }
 #sb{
     position:absolute;
-    margin-left: 566px;
+    margin-left: 588px;
     margin-top: 32px;
     
 }
@@ -106,7 +106,7 @@ input[type="search"]{
     height: 60px;
     width: 60px;
     margin-top: 14px;
-    margin-left: -646px;
+    margin-left: 629px;
     border-radius:50%;
     cursor:pointer;
 }
@@ -199,11 +199,11 @@ span{
 <body>
 <div class="menu-bar sticky-top">
     <ul>
-        {%if request.user.users.profile_picture%}
-      <a href="{%url 'pic-change' request.user.users.id%}" class="n1">
-            <img src="{{request.user.users.profile_picture.url}}" alt="" class="sc1"></a>
-        {%endif%}
-        <li class="active"><a href="#">Home </a></li>
+<!--        {%if request.user.users.profile_picture%}-->
+<!--      <a href="{%url 'pic-change' request.user.users.id%}" class="n1">-->
+<!--            <img src="{{request.user.users.profile_picture.url}}" alt="" class="sc1"></a>-->
+<!--        {%endif%}-->
+        <li class="active"><a href="{%url 'home'%}">Home </a></li>
         <li><a href="#">Link </a></li>
         <li><a href="#">Profile </a><i class="fa fa-angle-down"></i>
             <div class="sub-menu">
@@ -222,8 +222,12 @@ span{
         <li><a href="#">About Us </a></li>
         <li><a href="{%url 'signout'%}">Logout</a></li>
         <form action="" method="get">
-            <input type="search" placeholder="search here" required="required"><i class="fa fa-search" id="sb"></i>
+            <input type="search" placeholder="search here" required="required"><i class="fa-solid fa-magnifying-glass"id="sb"></i>
         </form>
+        {%if request.user.users.profile_picture%}
+      <a href="{%url 'pic-change' request.user.users.id%}" class="n1">
+            <img src="{{request.user.users.profile_picture.url}}" alt="" class="sc1"></a>
+        {%endif%}
     </ul>
 
 </div>
