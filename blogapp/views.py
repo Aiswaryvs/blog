@@ -160,4 +160,15 @@ def add_like(request,*args,**kwargs):
     blog.save()
     return redirect("home")
 
+def follow_friend(request,*args,**kwargs):
+    friend_id=kwargs.get("user_id")
+    friend_profile=UserProfile.objects.get(id=friend_id)
+    friend_profile.following.add(request.user)
+    friend_profile.save()
+    messages.success(request,"your started following"+friend_profile.user.username)
+    return redirect("home")
+
+
+
+
 

@@ -1,36 +1,67 @@
 {%extends 'base.html'%}
 {%block body_block%}
 <!--<div class="container">-->
+
+<!--{%load static%}-->
+<!--<link rel="stylesheet" href="{%static 'css/style.css'%}">-->
+
+<!--</style>-->
   <div class="row">
 
     <div class="col-4"></div>
     <div class="col-4">
-      <h1 class="mt-5">WELCOME{{request.user}}</h1>
+      <h1 class="mt-5"style="text-align:center">WELCOME{{request.user}}</h1>
     </div>
     <div class="col-4"></div>
   </div>
 
 <div class="row">
 <!--  <div class="col-4"></div>-->
-  <div class="col-8">
-    <form action="" method="post" enctype="multipart/form-data">
+  <div class="col-7">
+    <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="color:red;background-color:light">
+        Add Post
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+         <form action="" method="post" enctype="multipart/form-data">
             {%csrf_token%}
-              {{form.as_p}}
+<!--              {{form.as_p}}-->
+           <label>Title</label>
+           <input type="text" class="form-control" name="title" id="id_title" placeholder="Title"><br>
+           <label>Description</label>
+            <input type="text" class="form-control" name="description" id="id_description"
+                           placeholder="Description"><br>
+           <label>Upload image</label>
+           <input type="file" class="form-control" name="image" id="id_image" placeholder="Upload Image"><br>
       <input type="submit" value="post" class="btn btn-danger" style="margin-left:50%">
     </form>
+
+      </div>
+    </div>
+  </div>
+<!--    <form action="" method="post" enctype="multipart/form-data">-->
+<!--            {%csrf_token%}-->
+<!--              {{form.as_p}}-->
+<!--      <input type="submit" value="post" class="btn btn-danger" style="margin-left:50%">-->
+<!--    </form>-->
   </div>
   <div class="col-4"></div>
 </div>
 {%for blog in blogs%}
-<div class="row border border-danger mt-5">
+<!--  demo-->
+<div class="container border border-danger mt-5" style="border-radius: 6px;padding: 20px;color: #626262;margin: 20px 0; width:100%;align-items:center;">
   <div class="col-4"></div>
   <div class="col-4">
     <p>{{blog.title}}</p>
     {%if blog.image%}
-      <img src="{{blog.image.url}}" class="img-fluid" alt="...">
+      <img src="{{blog.image.url}}" class="img-fluid" alt="..." style="width: 100%;border-radius: 4px;margin-bottom: 5px;">
     <p>Posted_by :{{blog.author}}</p>
     <p>Created_at :{{blog.posted_date}}</p>
-    <a href="{%url 'add-like' blog.id%}" class="btn btn-danger">Like</a>
+    <a href="{%url 'add-like' blog.id%}"><i class="fa-solid fa-thumbs-up" style="font-size:169%"></i></a>
         {{blog.get_like_count}}
         {{blog.get_liked_users}}
     <form action="{%url 'add-comment' blog.id%}" method="post">

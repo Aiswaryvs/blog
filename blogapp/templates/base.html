@@ -232,10 +232,10 @@ span{
 
 </div>
 <h1 class="mbl">My<span>Blog</span></h1>
-<div class="container" style="margin-top: 100px; margin-left: 40px;">
+<div class="container" style="margin-top: 100px; margin-left: 40px; position:sticky">
     <div class="row">
         <div class="col-4">
-            <div class="card">
+            <div class="card" >
                 <div class="image-content">
                     <span class="overlay"></span>
                     <div class="card-image">
@@ -259,13 +259,29 @@ span{
                 <div class="card-body">
                     <a href="{%url 'profile-update' request.user.users.id%}" class="button">UpdateProfile</a>
 
-<!--                    <button class="button">Update Profile</button>-->
                 </div>
 
             </div>
+            <hr>
+
             <!-- <h1>hello</h1> -->
 
+            <div class="container border border-danger">
+                <h4 style="color:red">followings</h4>
+            {%for user in request.user.users.fetch_followings%}
+            <h6>{{user}}</h6>
+            {%endfor%}
+                <h4>Count</h4>
+            {{request.user.users.fetch_following_count}}
+                {%for userprofile in request.user.users.get_invitations%}
+<!--                {{request.user.users.get_invitations}}-->
+                {{userprofile.user.username}}
+                <a href="{%url 'follow-frnd' userprofile.id%}" class="button">Follow</a>
+                {%endfor%}
         </div>
+
+        </div>
+
 
         <div class="col-8">
 
