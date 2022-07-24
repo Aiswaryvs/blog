@@ -18,6 +18,7 @@ class UserProfile(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE,related_name="users")
     following=models.ManyToManyField(User,related_name="followings",blank=True)
 
+
     @property
     def fetch_followings(self):
         return self.following.all()
@@ -28,20 +29,27 @@ class UserProfile(models.Model):
 
     @property
     def get_followers(self):
-        all_users=UserProfile.object.all()
+        all_users=UserProfile.objects.all()
         followers_list=[]
         for user in all_users:
             if self.user in user.fetch_followings:
                 followers_list.append(user)
-                followers_count=len(followers_list)
-                return followers_count
+        return followers_list
+
+    @property
+    def followers_count(self):
+        return len(self.get_followers)
+
 
     @property
     def get_invitations(self):
-        all_users = UserProfile.objects.all().exclude(user=self.user)# fetch all users except current or loged user
+        all_users_profile = UserProfile.objects.all().exclude(user=self.user)# fetch all users profile objects except current or loged user
+        # taking user objects from all_users_profile
+        user_list=[userprofile.user for userprofile in all_users_profile]
         following_list = [u for u in self.fetch_followings]  # exclude my following from all users
-        invitations = [user for user in all_users if user not in following_list]
-        return random.sample(invitations,1)
+        invitations = [user for user in user_list if user not in following_list]
+        return invitations
+        # return random.sample(invitations,1)
 
 class Blogs(models.Model):
     title=models.CharField(max_length=150)

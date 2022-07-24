@@ -6,9 +6,23 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from blogapp.models import UserProfile, Blogs,Comments
+from django.utils.decorators import method_decorator
 
 
 # Create your views here.
+
+
+def signin_required(fn):
+    def wrapper(request,*args,**kwargs):
+        if request.user.is_authenticated:
+            return fn(request,*args,**kwargs)
+        else:
+            messages.error(request,"user must login")
+            return redirect("login")
+    return wrapper
+
+
+
 
 class SignUpView(CreateView):
     form_class = UserRegistrationForm
@@ -54,7 +68,7 @@ class LoginView(FormView):
                 return render(request, self.template_name, {"form": form})
         return render(request, self.template_name, {"form": form})
 
-
+@method_decorator(signin_required,name="dispatch")
 class IndexView(CreateView):
     model = Blogs
     form_class = BlogForm
@@ -75,7 +89,7 @@ class IndexView(CreateView):
         context["comment_form"]=comment_form
         return context
 
-
+@method_decorator(signin_required,name="dispatch")
 class CreateUserProfileView(CreateView):
     model = UserProfile
     template_name = "addprofile.html"
@@ -88,16 +102,16 @@ class CreateUserProfileView(CreateView):
         self.object = form.save()
         return super().form_valid(form)
 
-
+@method_decorator(signin_required,name="dispatch")
 class ViewMyprofileView(TemplateView):
     template_name = "view-profile.html"
 
-
+@signin_required
 def sign_out(request, *args, **kwargs):
     logout(request)
     return redirect("login")
 
-
+@method_decorator(signin_required,name="dispatch")
 class PasswordResetView(FormView):
     template_name = "passwordreset.html"
     form_class = PasswordResetForm
@@ -118,7 +132,7 @@ class PasswordResetView(FormView):
                 messages.error(request, "Invalid Credentials")
                 return render(request, self.template_name, {"form": form})
 
-
+@method_decorator(signin_required,name="dispatch")
 class ProfileUpdateView(UpdateView):
     model = UserProfile
     form_class = UserProfileForm
@@ -131,7 +145,7 @@ class ProfileUpdateView(UpdateView):
         self.object = form.save()
         return super().form_valid(form)
 
-
+@method_decorator(signin_required,name="dispatch")
 class ChangeProfilePicView(UpdateView):
     template_name = "change-propic.html"
     form_class = ChangePropicForm
@@ -143,6 +157,9 @@ class ChangeProfilePicView(UpdateView):
         messages.success(self.request, "Profile has been Updated")
         self.object = form.save()
         return super().form_valid(form)
+
+
+@signin_required
 def add_comment(request,*args,**kwargs):
     if request.method=="POST":
         blog_id=kwargs.get("post_id")
@@ -153,6 +170,8 @@ def add_comment(request,*args,**kwargs):
         messages.success(request,"Comment has been posted")
         return redirect("home")
 
+
+@signin_required
 def add_like(request,*args,**kwargs):
     blog_id=kwargs.get("post_id")
     blog=Blogs.objects.get(id=blog_id)
@@ -160,12 +179,14 @@ def add_like(request,*args,**kwargs):
     blog.save()
     return redirect("home")
 
+
+@signin_required
 def follow_friend(request,*args,**kwargs):
     friend_id=kwargs.get("user_id")
-    friend_profile=UserProfile.objects.get(id=friend_id)
-    friend_profile.following.add(request.user)
+    friend_profile=User.objects.get(id=friend_id)
+    request.user.users.following.add(friend_profile)
     friend_profile.save()
-    messages.success(request,"your started following"+friend_profile.user.username)
+    messages.success(request,"your started following  "+friend_profile.username)
     return redirect("home")
 
 

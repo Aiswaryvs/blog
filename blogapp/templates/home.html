@@ -63,7 +63,10 @@
     <p>Created_at :{{blog.posted_date}}</p>
     <a href="{%url 'add-like' blog.id%}"><i class="fa-solid fa-thumbs-up" style="font-size:169%"></i></a>
         {{blog.get_like_count}}
-        {{blog.get_liked_users}}
+<!--        {{blog.get_liked_users}}-->
+    {%for name in blog.get_liked_users%}
+    {{name}}
+    {%endfor%}
     <form action="{%url 'add-comment' blog.id%}" method="post">
       {%csrf_token%}
       {{comment_form.as_p}}
