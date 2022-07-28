@@ -30,27 +30,27 @@
 <!--        <div class="col-4"></div>-->
 <!--    </div>-->
 <h1>Update Profile</h1>
-    <div class="container mt-5">
+<div class="container mt-5" style="flex-basis: 47%;">
 
     <div class="row">
 
         <form action="" method="post" enctype="multipart/form-data">
             {%csrf_token%}
-              {{form.as_p}}
+            {{form.as_p}}
 
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col-4"></div>
-                        <div class="col-4">
-                            <input type="Submit" class="btn btn-danger" id="">
-                        </div>
-                        <div class="col-4"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-4"></div>
+                    <div class="col-4">
+                        <input type="Submit" class="btn btn-danger" id="">
                     </div>
+                    <div class="col-4"></div>
                 </div>
-    </div>
             </div>
-
-        </form>
     </div>
+</div>
+
+</form>
+</div>
 {%endblock%}
