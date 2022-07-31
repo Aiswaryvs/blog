@@ -205,17 +205,18 @@
     }
 
     .login-box{
-        width: 320px;
-        height: 420px;
+        width: 323px;
+        height: 600px;
         background: rgb(248, 179, 179);
         color: #fff;
-        top: 28%;
-        left: 50%;
+        top: 84%;
+        left: 82%;
         position: absolute;
         transform: translate(-50%,-50%);
         box-sizing: border-box;
         padding: 70px 30px;
         border-radius: 4px;
+    }
     }
     .avatar{
         width: 75px;
@@ -310,7 +311,7 @@
     .right-sidebar{
         background:#fff;
         flex-basis: 25%;
-        position:sticky;
+<!--        position:sticky;-->
         top: 70px;
         align-self:flex-start;
         height: 100vh;
@@ -607,115 +608,135 @@
         text-decoration: none;
         color: #626262;
     }
+
 </style>
 
 
 <!--<div class="container">-->
 <!--            <div class="left-sidebar"></div>-->
+
 {%block body_block%}
-    <div class="main-content">
+<h1 style="text-align:center;color:red;font-family:'Ultra', serif;">WELCOME <span> {{request.user}}</span></h1>
+<div class="main-content">
 
-        <div class="write-post-container">
-            <div class="user-profile">
-                {%if request.user.users.profile_picture%}
-                <img src="{{request.user.users.profile_picture.url}}" alt="">
-                {%endif%}
-                <div>
-                    <p>{{request.user}}</p>
-                    <small>Public <i class="fas fa-caret-down"></i></small>
-                </div>
+    <div class="write-post-container">
+        <div class="user-profile">
+            {%if request.user.users.profile_picture%}
+            <img src="{{request.user.users.profile_picture.url}}" alt="">
+            {%endif%}
+            <div>
+                <p>{{request.user}}</p>
+                <small>Public <i class="fas fa-caret-down"></i></small>
             </div>
+        </div>
 
 
-            <div class="post-input-container">
-                <!--                    <textarea rows="3" placeholder="What's on your mind?"></textarea>-->
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#flush-collapseOne" aria-expanded="false"
-                                    aria-controls="flush-collapseOne">
-                                What's on your mind? Add Your Post
-                            </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse"
-                             aria-labelledby="flush-headingOne"
-                             data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">
-                                <form action="" method="post" enctype="multipart/form-data">
-                                    {%csrf_token%}
-                                    <!--                                         {{form.as_p}}-->
-                                    <label>Title</label>
-                                    <input type="text" class="form-control" name="title" id="id_title"
-                                           placeholder="Title"><br>
-                                    <label>Description</label>
-                                    <input type="text" class="form-control" name="description" id="id_description"
-                                           placeholder="Description"><br>
-                                    <label>Upload image</label>
-                                    <input type="file" class="form-control" name="image" id="id_image"
-                                           placeholder="Upload Image"><br>
-                                    <input type="submit" value="post" class="btn btn-danger" style="margin-left:50%">
-                                </form>
-                            </div>
+        <div class="post-input-container">
+            <!--                    <textarea rows="3" placeholder="What's on your mind?"></textarea>-->
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                aria-controls="flush-collapseOne">
+                            What's on your mind? Add Your Post
+                        </button>
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse"
+                         aria-labelledby="flush-headingOne"
+                         data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {%csrf_token%}
+                                <!--                                         {{form.as_p}}-->
+                                <label>Title</label>
+                                <input type="text" class="form-control" name="title" id="id_title"
+                                       placeholder="Title"><br>
+                                <label>Description</label>
+                                <input type="text" class="form-control" name="description" id="id_description"
+                                       placeholder="Description"><br>
+                                <label>Upload image</label>
+                                <input type="file" class="form-control" name="image" id="id_image"
+                                       placeholder="Upload Image"><br>
+                                <input type="submit" value="post" class="button" style="margin-left:40%">
+                            </form>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="add-post-links">
-                    <a href=""><img src="{%static 'images/live-video.png'%}" alt="">Live Video</a>
-                    <a href=""><img src="{%static 'images/photo.png'%}" alt="">Photo/Video</a>
-                    <a href=""><img src="{%static 'images/feeling.png'%}" alt="">Activity</a>
-                </div>
+            <div class="add-post-links">
+                <a href=""><img src="{%static 'images/live-video.png'%}" alt="">Live Video</a>
+                <a href=""><img src="{%static 'images/photo.png'%}" alt="">Photo/Video</a>
+                <a href=""><img src="{%static 'images/feeling.png'%}" alt="">Activity</a>
             </div>
         </div>
-        {%for blog in blogs%}
-        <div class="post-container">
+    </div>
+    {%for blog in blogs%}
+    <div class="post-container">
 
-            <div class="post-row">
-                <div class="user-profile">
-                    <img src="{{blog.author.users.profile_picture.url}}" alt="">
-                    <div>
-                        <p>{{blog.author}}</p>
+        <div class="post-row">
+            <div class="user-profile">
+                <img src="{{blog.author.users.profile_picture.url}}" alt="">
+                <div>
+                    <p>{{blog.author}}</p>
 
-                        <span>{{blog.posted_date}}</span>
-                    </div>
+                    <span>{{blog.posted_date}}</span>
                 </div>
-                <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+            </div>
+            <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+        </div>
+
+        <p class="post-text"><span>{{blog.title}}</span><a href=""></a></p>
+        {%if blog.image%}
+        <img src="{{blog.image.url}}" alt="" class="post-img">
+        <div class="post-row">
+            <div class="activity-icons">
+                <div>
+                    <a href="{%url 'add-like' blog.id%}"><i class="fa-solid fa-heart"
+                                                            style="color: red;font-size:169%"></i></a>
+                    <p style="margin-top:18px;margin-left:12px">{{blog.get_like_count}}</p>
+
+                    <!--                            <img src="./images/like-blue.png" alt="">120-->
+                </div>
+            <div>
+                    <div>
+
+                    <form action="{%url 'add-comment' blog.id%}" method="post"><i class="fa-solid fa-comment"
+                                                                                  style="color: black;font-size:169%"></i></a>
+                        {%csrf_token%}
+                        {{comment_form.as_p}}
+                        {%for comment in blog.comments_set.all%}
+                        <div>
+                            {{comment.comment}}
+                            {{comment.user}}
+                        </div>
+                        {%endfor%}
+                        <input type="submit" class="btn btn-danger">
+                    </form>
             </div>
 
-            <p class="post-text"><span>{{blog.title}}</span><a href=""></a></p>
-            {%if blog.image%}
-                <img src="{{blog.image.url}}" alt="" class="post-img">
-            <div class="post-row">
-                <div class="activity-icons">
-                    <div>
-                        <a href="{%url 'add-like' blog.id%}"><i class="fa-solid fa-heart" style="color: red;font-size:169%"></i></a>
-                        <p style="margin-top:18px;margin-left:12px">{{blog.get_like_count}}</p>
 
-                        <!--                            <img src="./images/like-blue.png" alt="">120-->
-                    </div>
-                    <div>
-                        <i class="fa-solid fa-comment"></i>
-                        <!--                            <img src="./images/comments.png" alt="">220-->
-                    </div>
-                    <div>
-                        <!--                            <img src="./images/share.png" alt="">20-->
-                    </div>
+                    <!--                            <img src="./images/comments.png" alt="">220-->
                 </div>
-                <div class="post-profile-icon">
-                    <img src="{{blog.author.users.profile_picture.url}}" alt=""><i class="fas fa-caret-down"></i>
+                <div>
+                    <!--                            <img src="./images/share.png" alt="">20-->
                 </div>
-
-
             </div>
+            <div class="post-profile-icon">
+                <img src="{{blog.author.users.profile_picture.url}}" alt=""><i class="fas fa-caret-down"></i>
+            </div>
+
+
+        </div>
         {%endif%}
 
 
-        </div>
-        {%endfor%}
-
-        <button type="button" class="load-more-btn">Load More</button>
     </div>
+    {%endfor%}
+
+    <button type="button" class="load-more-btn">Load More</button>
+</div>
 <!--    <div class="right-sidebar">-->
 <!--        &lt;!&ndash;            <div class="login-box">&ndash;&gt;-->
 <!--        &lt;!&ndash;                <img src="./images/profile-pic.png" alt="" class="avatar">&ndash;&gt;-->

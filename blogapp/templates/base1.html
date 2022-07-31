@@ -211,11 +211,11 @@
 
     .login-box{
         width: 323px;
-        height: 538px;
+        height: 2000px;
         background: rgb(248, 179, 179);
         color: #fff;
-        top: 35%;
-        left: 50%;
+        top: 160%;
+        left: 82%;
         position: absolute;
         transform: translate(-50%,-50%);
         box-sizing: border-box;
@@ -315,7 +315,7 @@
     .right-sidebar{
         background:#fff;
         flex-basis: 25%;
-        position:sticky;
+<!--        position:sticky;-->
         top: 70px;
         align-self:flex-start;
         height: 100vh;
@@ -649,7 +649,7 @@
                   {%endif%}
                 <li><a href="{%url 'password-reset'%}">Change Password</a></li>
                 <li><a href="#">update</a></li>
-                <li><a href="#">View</a></li>
+<!--                <li><a href="#">View</a></li>-->
               </ul>
             </div>
           </li>
@@ -706,7 +706,7 @@
                     <img class="card-img-top" src="{{user.users.profile_picture.url}}" alt=""
                          style="height: 80px;width: 80px;margin-top: 18px;margin-left:15px;border-radius: 50%;cursor: pointer;">
                     <div class="card-body">
-                        <h5 class="card-title" style="margin-top:-70px;margin-left:-12px">{{user.username}}</h5><br>
+                        <h5 class="card-title" style="margin-top:-70px;margin-left:23px"><span>{{user.username}}</span></h5><br>
                         <hr>
                         <a href="{%url 'follow-frnd' user.id%}"><button class="button" style="margin-left:99px;margin-top:-3px;">Follow</button></a>
                     </div>
@@ -882,16 +882,22 @@
             <div class="login-box">
                 <img src="{{request.user.users.profile_picture.url}}" alt="" class="avatar">
                 <br>
-                <h2 style="font-family:'Ultra', serif;">Followings</h2>
+                <h2 style="font-family:'Ultra', serif;color:#5d0303;">Followings</h2><br>
                 {%for user in request.user.users.fetch_followings%}
-                <h6>{{user}}</h6>
+                <img src="{{user.users.profile_picture.url}}" alt="" style="border-radius:50%;width:60px;height:60px;">
+                <h6 style="margin-top:-46px;margin-left:80px"><span>{{user}}</span></h6><br>
+                <hr>
+
+
                 {%endfor%}
                 <h4>Count</h4>
                 {{request.user.users.fetch_following_count}}
                 <hr>
-                <h2 style="font-family:'Ultra', serif;">Followers</h2>
+                <h2 style="font-family:'Ultra', serif;color:#5d0303;">Followers</h2><br>
                 {%for user in request.user.users.get_followers%}
-                    {{user.user}}
+                <img src="{{user.user.users.profile_picture.url}}" alt="" style="border-radius:50%;width:60px;height:60px;">
+                 <h6 style="margin-top:-46px;margin-left:80px"><span>{{user.user}}</span></h6><br>
+                <hr>
                 {%endfor%}
 <!--                                {{request.user.users.get_followers}}-->
                 <h4>Count</h4>
