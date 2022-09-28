@@ -890,8 +890,8 @@
 
 
                 {%endfor%}
-                <h4>Count</h4>
-                {{request.user.users.fetch_following_count}}
+                <h3 style="color:#d11313">Count</h3>
+                <h4 style="color:#d11313">{{request.user.users.fetch_following_count}}</h4>
                 <hr>
                 <h2 style="font-family:'Ultra', serif;color:#5d0303;">Followers</h2><br>
                 {%for user in request.user.users.get_followers%}
@@ -900,8 +900,8 @@
                 <hr>
                 {%endfor%}
 <!--                                {{request.user.users.get_followers}}-->
-                <h4>Count</h4>
-                {{request.user.users.followers_count}}
+                <h3 style="color:#d11313">Count</h3>
+                <h4 style="color:#d11313">{{request.user.users.followers_count}}</h4>
 
             </div>
         </div>

@@ -284,8 +284,8 @@ span{
                 {%for user in request.user.users.fetch_followings%}
                 <h6>{{user}}</h6>
                 {%endfor%}
-                <h4>Count</h4>
-                {{request.user.users.fetch_following_count}}
+                <h4 >Count</h4>
+               <h4 style="color:#d11313">{{request.user.users.fetch_following_count}}</h4>
                 <hr>
                 <h4>followers</h4>
                 {%for user in request.user.users.get_followers%}

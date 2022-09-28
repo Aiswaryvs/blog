@@ -706,13 +706,15 @@
                                                                                   style="color: black;font-size:169%"></i></a>
                         {%csrf_token%}
                         {{comment_form.as_p}}
+                        <input type="submit" class="btn btn-danger"><br><br>
                         {%for comment in blog.comments_set.all%}
                         <div>
-                            {{comment.comment}}
-                            {{comment.user}}
+                            <h6><img src="{{comment.user.users.profile_picture.url}}" alt="" style="width: 20px;
+    border-radius: 50%;">{{comment.user}}
+                            {{comment.comment}}</h6>
                         </div>
                         {%endfor%}
-                        <input type="submit" class="btn btn-danger">
+
                     </form>
             </div>
 
